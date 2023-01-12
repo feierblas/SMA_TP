@@ -120,23 +120,23 @@ class Agent {
                 }
             }
         } else if (this.state == "survie") {
-            // if (this.espece === "decomposeur") {
-            //     if (dangereux.length > 0 ){
-            //         target = dangereux[0].copy().add(this.body.pos.copy())
-            //     } else {
-            //         target = createVector(random(-1,1), random(-1,1))
-            //         while (target.mag() === 0)
-            //             target = createVector(random(-1,1), random(-1,1))
-            //     }
-            // } else {
-            //     if (dangereux.length > 0 ){
-            //         target = dangereux[0].pos.copy().add(this.body.pos.copy())
-            //     } else {
+            if (this.espece === "decomposeur") {
+                if (dangereux.length > 0 ){
+                    target = dangereux[0].pos.copy().add(this.body.pos.copy())
+                } else {
                     target = createVector(random(-1,1), random(-1,1))
                     while (target.mag() === 0)
                         target = createVector(random(-1,1), random(-1,1))
-            //     }
-            // }
+                }
+            } else {
+                if (dangereux.length > 0 ){
+                    target = dangereux[0].body.pos.copy().add(this.body.pos.copy())
+                } else {
+                    target = createVector(random(-1,1), random(-1,1))
+                    while (target.mag() === 0)
+                        target = createVector(random(-1,1), random(-1,1))
+                }
+            }
 
         } else if (this.state == "symbiose") {
 

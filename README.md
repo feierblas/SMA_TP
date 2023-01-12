@@ -9,4 +9,4 @@ Gris = Décomposeurs
 Noir = mort
 
 
-J'ai du déactiver la partie surviveur, il a eu un bug vers 12h56
+J'ai du déactiver la partie surviveur, il a eu un bug vers 12h56 !!!!!!!!! FIX 13h01
