@@ -55,7 +55,7 @@ const computePerception = agent => {
   agents.map(a => {
     if (a.uid !== agent.uid)
       if (agent.body.fustrum.inside(a.body)) {
-        agent.body.fustrum.perceptionList.push(agent)
+        agent.body.fustrum.perceptionList.push(a)
       }
   })
 
@@ -92,13 +92,13 @@ const environnement = () => {
         if(dist(agentA.body.pos.x, agentA.body.pos.y, agentB.body.pos.x, agentB.body.pos.y) <= agentA.body.fustrum.radius / 2 +agentB.body.fustrum.radius / 2) {
           switch (agentA.espece){
             case "superpredateur" :
-              if (agentB.espece === "carnivore"){
+              if (agentB.espece === "carnivore" && agentB.body.mort){
                 agentA.body.jaugeFaim.value-=20
                 agents = agents.filter(a => a.uid != agentB.uid)
               }
               break
             case "carnivore" :
-              if (agentB.espece === "herbivore"){
+              if (agentB.espece === "herbivore" && agentB.body.mort){
                 agentA.body.jaugeFaim.value-=20
                 agents = agents.filter(a => a.uid != agentB.uid)
               }
@@ -114,6 +114,33 @@ const environnement = () => {
       }
     })
   })
+}
+
+const display = () => {
+  // carnivore",superpredateur - herbivore - decomposeur
+  let superpredateur = 0, carnivore = 0, herbivore = 0, decomposeur = 0, total = 0
+  agents.map(agent => {
+    switch (agent.espece){
+      case "superpredateur" :
+        superpredateur++
+        break
+      case "carnivore" :
+        carnivore++
+        break
+      case "herbivore" :
+        herbivore++
+        break
+      case "decomposeur" :
+        decomposeur++
+        break
+    }
+    total++
+  })
+  console.log("----------------------------------------------------------")
+  console.log("Population total : " + total + " (100%)")
+  console.log("Superpredateur : " + superpredateur  )
+  console.log("Herbivore : " + herbivore)
+  console.log("Décomposeur : " + decomposeur)
 }
 
 function draw() {
@@ -140,4 +167,5 @@ function draw() {
   })
 
   environnement()
+  display()
 }

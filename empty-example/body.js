@@ -22,8 +22,7 @@ class Body {
             "value" : 0
         }
         this.nas = millis() // 0 ans, on travail avec le millis
-        // this.esperance = millis() + random(10000, esperanceMax * 10000) // esperance de vie entre 10s et 200s
-        this.esperance = millis() + random(10000, esperanceMax * 10000) * 1000 // esperance de vie entre 10s et 200s
+        this.esperance = millis() + random(10000, esperanceMax * 10000) // esperance de vie entre 10s et 200s
         // this.radius = 20
         this.mort = false
         this.dorm = false

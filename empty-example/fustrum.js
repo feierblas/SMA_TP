@@ -2,7 +2,7 @@ class Fustrum {
     constructor(body) {
         this.parent = body
         this.radius = 20 // taille
-        this.radiusDetection = 50 // vision
+        this.radiusDetection = 100 // vision
         this.perceptionList = []
     }
 

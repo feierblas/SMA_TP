@@ -51,11 +51,10 @@ class Agent {
 
     setState() {
         if (this.espece === "superpredateur") {
-            if (this.body.jaugeFaim.value * 100 / this.body.jaugeFaim.max > 30) { // plus de 30%
+            if (this.body.jaugeFaim.value * 100 / this.body.jaugeFaim.max > 30) // plus de 30%
                 this.state = "chasser"
-            } else {
+            else
                 this.state = "rien"
-            }
         } else if (this.espece === "carnivore") {
             if (this.body.jaugeFaim.value * 100 / this.body.jaugeFaim.max > 50) { // plus de 30%
                 this.state = "chasser"
@@ -71,29 +70,74 @@ class Agent {
         } else if (this.espece === "decomposeur") {
             this.state = "chasser"
         }
+        this.state = "chasser"
         // standard =  chasser / survie / symbiose
     }
 
     update() {
         let target = createVector()
         let [chasser, dangereux ] = this.filterPerceptionByObject()
+        this.setState()
+        if(this.state == "chasser"){
+            let distProie = 0
+            let distDanger = 0
+            if (chasser.length > 0){
+                if (this.espece === "herbivore")
+                    distProie = dist(this.body.pos.x, this.body.pos.y, chasser[0].pos.x, chasser[0].pos.y)
+                else
+                    distProie = dist(this.body.pos.x, this.body.pos.y, chasser[0].body.pos.x, chasser[0].body.pos.y)
+            }
+
+            if (dangereux.length > 0) {
+                if (this.espece === "decomposeur")
+                    distDanger = dist(this.body.pos.x, this.body.pos.y, dangereux[0].pos.x, dangereux[0].pos.y)
+                else
+                    distDanger = dist(this.body.pos.x, this.body.pos.y, dangereux[0].body.pos.x, dangereux[0].body.pos.y)
+            }
+
+            if(distDanger > distProie)
+                this.state = "survie"
+            // target = chasser[0].pos.copy().sub(this.body.pos.copy())
+        }
 
         if (this.state == "chasser"){
-            if (chasser.length > 0 ){
-                target = chasser[0].pos.copy().sub(this.body.pos.copy())
-            } else {
-                target = createVector(random(-1,1), random(-1,1))
-                while (target.mag() === 0)
+            if (this.espece === "herbivore") {
+                if (chasser.length > 0 ){
+                    target = chasser[0].pos.copy().sub(this.body.pos.copy())
+                } else {
                     target = createVector(random(-1,1), random(-1,1))
+                    while (target.mag() === 0)
+                        target = createVector(random(-1,1), random(-1,1))
+                }
+            } else {
+                // console.log("here")
+                if (chasser.length > 0 ){
+                    target = chasser[0].body.pos.copy().sub(this.body.pos.copy())
+                } else {
+                    target = createVector(random(-1,1), random(-1,1))
+                    while (target.mag() === 0)
+                        target = createVector(random(-1,1), random(-1,1))
+                }
             }
         } else if (this.state == "survie") {
-            if (chasser.length > 0 ){
-                target = chasser[0].pos.copy().sub(this.body.pos.copy())
-            } else {
-                target = createVector(random(-1,1), random(-1,1))
-                while (target.mag() === 0)
+            // if (this.espece === "decomposeur") {
+            //     if (dangereux.length > 0 ){
+            //         target = dangereux[0].copy().add(this.body.pos.copy())
+            //     } else {
+            //         target = createVector(random(-1,1), random(-1,1))
+            //         while (target.mag() === 0)
+            //             target = createVector(random(-1,1), random(-1,1))
+            //     }
+            // } else {
+            //     if (dangereux.length > 0 ){
+            //         target = dangereux[0].pos.copy().add(this.body.pos.copy())
+            //     } else {
                     target = createVector(random(-1,1), random(-1,1))
-            }
+                    while (target.mag() === 0)
+                        target = createVector(random(-1,1), random(-1,1))
+            //     }
+            // }
+
         } else if (this.state == "symbiose") {
 
         } else {
