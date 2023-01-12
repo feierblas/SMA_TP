@@ -1,0 +1,2 @@
+# SMA_TP
+TP de SMA 12/01/2023
