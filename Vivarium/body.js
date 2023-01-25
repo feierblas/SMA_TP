@@ -44,7 +44,7 @@ class Body {
         this.agent = agent
         this.vitesse = createVector()
         this.acceleration = createVector()
-        this.nas = 0 // 0 ans, on travail avec le millis
+        this.nas = 0 // 0 ans
         this.esperance = 0
         this.mort = false
         this.dorm = false
@@ -58,8 +58,7 @@ class Body {
 
     update(){
         // on update ici, car comme j'ai implémenter un systeme de screen, le nas et esperance ne sont plus bon si on le déclarer dans le constructeur
-        if (this.nas === 0 || this.esperance === 0) {
-            this.nas = millis() // 0 ans, on travail avec le millis
+        if (this.esperance === 0) {
             this.esperance = millis() + this.esperanceWithoutModification * 10000 // esperance de vie => 1ans = 10s
         }
         if (this.dorm){
