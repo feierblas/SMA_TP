@@ -2,7 +2,7 @@ let agents, items, state, time_gameStarted, buttonStart, buttonRestart, bestEspa
 
 function setup() {
   console.log("----- Setup Start -----")
-  createCanvas(950,650)
+  createCanvas(Scenario.gameSize.width,Scenario.gameSize.height)
   frameRate(30)
 
   state = GameState.TO_START
@@ -217,7 +217,7 @@ const calculateBestEspece = () => {
 
   //Afficher dans la console, l’individu ayant la meilleur génétique
   if (bestAgent !== null) {
-    console.log("----------------------------------------------------------")
+    console.log("-------------------------------------------------------")
     console.log("L'individu ayant la meilleure génétique existant")
     console.log("Espece : " + bestAgent.espece)
     console.log("Mobilité (max) => Vitesse : " + bestAgent.body.vitesseMax.toFixed(2) + " & Acceleration : " + bestAgent.body.accelerationMax.toFixed(2))
@@ -248,7 +248,7 @@ const display = () => {
     }
 
   })
-  console.log("----------------------------------------------------------")
+  console.log("-------------------------------------------------------")
   console.log("Population total : " + total)
   if (total > 0 ){
     console.log("Superpredateur : " + superpredateur + " (" + (superpredateur/total * 100).toFixed(0) + "%)")
@@ -322,6 +322,10 @@ const game_over = () => {
 }
 const game_toStart = () => {
   background(180)
+  textAlign(CENTER, CENTER)
+  fill(255,0,0)
+  textSize(32)
+  text("TP SMA : Vivarium", width/2, 50)
   buttonStart.style('display', 'block')
   buttonStart.size(220, 100)
   buttonStart.position(width/2 - buttonStart.width/2, height/2 - buttonStart.height/2)
