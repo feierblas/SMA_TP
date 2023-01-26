@@ -1,40 +1,44 @@
 const Scenario = {
-    duréeSimu : 60, // en s
+    gameSize : {
+        width : 1200,
+        height : 900
+    },
+    duréeSimu : 120, // en s
     respawn : true,
     colorHelp : true,
     levelUp : 3, // Plus grand la valeur, plus les modifications des paramètres peuvent être plus grand
     SuperPredateur: {
-        nb: 5,
+        nb: 8,
         parametres: {
             vitesse: [2.8, 3.5],
             acceleration: [11, 12.5],
             faim: [50,100],
             fatigue: [75,105],
-            reproduction: [75,105],
+            reproduction: [80,105],
             esperance: [20, 25],
             radius : [65, 105]
         }
     },
     Carnivore: {
-        nb: 10,
+        nb: 15,
         parametres: {
             vitesse: [2.5, 3.8],
             acceleration: [10, 13],
             faim: [80, 125],
             fatigue: [80, 120],
-            reproduction: [60, 80],
+            reproduction: [75, 100],
             esperance: [15, 25],
             radius : [50, 120]
         }
     },
     Herbivore: {
-        nb: 15,
+        nb: 8,
         parametres: {
             vitesse: [1.8, 2.3],
-            acceleration: [12, 17],
+            acceleration: [12, 16],
             faim: [100, 135],
             fatigue: [60, 100],
-            reproduction: [60, 80],
+            reproduction: [70, 95],
             esperance: [15, 25],
             radius : [70, 90]
         }
