@@ -106,9 +106,9 @@ class Agent {
                 distProie = chasser[0].dist
             if (dangereux.length > 0){
                 if (this.espece === Espece.DECOMPOSEUR)
-                    distDanger = dangereux[0].dist <= this.body.radius * 1.2 ? dangereux[0].dist : distDanger
+                    distDanger = dangereux[0].dist <= this.body.radius * 1.2 ? dangereux[0].dist : this.body.fustrum.radius + 1
                 else
-                    distDanger = dangereux[0].dist < 100 ? dangereux[0].dist : distDanger
+                    distDanger = dangereux[0].dist < 100 ? dangereux[0].dist : this.body.fustrum.radius + 1
             }
             if (distProie > distDanger)
                 this.state = Comportement.SURVIE
