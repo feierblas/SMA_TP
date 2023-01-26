@@ -145,7 +145,7 @@ class Body {
         circle(this.pos.x, this.pos.y, this.radius);
 
         // Pour mieux suivre le scenario
-        if (this.agent.state !== Comportement.RANDOM && !this.mort && Scenario.colorHelp) {
+        if (this.agent.state !== Comportement.RANDOM && !this.mort && Scenario.colorHelp && !this.dorm) {
             const angle = Math.PI*2 / 10;
             const circleRadius = sin(angle/2) * 15;
 
